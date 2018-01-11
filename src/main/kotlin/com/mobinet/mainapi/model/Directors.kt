@@ -10,7 +10,7 @@ import javax.persistence.*
 data class Directors (
         @Id
         @GeneratedValue(strategy=GenerationType.AUTO)
-        var idDirectors: Long = 0,
+        var id: Long = 0,
 
         @get: NotBlank
         var username: String = "",

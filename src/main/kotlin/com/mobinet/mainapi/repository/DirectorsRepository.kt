@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 interface DirectorsRepository: JpaRepository<Directors, Long> {
     fun findByUsername(username: String): Iterable<Directors>
     fun findByEmail(email: String?): Iterable<Directors>
-    fun findByPhone(phone: String?): Iterable<Directors>
+    fun findById(id: Long): Iterable<Directors>
 }

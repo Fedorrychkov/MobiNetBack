@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response
 @Component
 @Path("signup")
 open class SignupResource @Autowired constructor(val service: SignupService) {
-    data class Signup(val status: Response.Status, val message: String, val token: String? = "")
+    data class Request(val status: Response.Status, val message: String, val token: String? = "")
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -22,9 +22,9 @@ open class SignupResource @Autowired constructor(val service: SignupService) {
         directors.userConfirmed = false
         val resp = service.signup(directors)
         return when(resp) {
-            is SignupService.Resp.Success -> Response.ok(Signup(Response.Status.OK, resp.msg)).build()
-            is SignupService.Resp.HaveUser -> Response.ok(Signup(Response.Status.BAD_REQUEST, resp.msg)).build()
-            is SignupService.Resp.SaveDirector -> Response.ok(Signup(Response.Status.OK, "User created")).build()
+            is SignupService.Resp.Success -> Response.ok(Request(Response.Status.OK, resp.msg)).build()
+            is SignupService.Resp.HaveUser -> Response.ok(Request(Response.Status.BAD_REQUEST, resp.msg)).build()
+            is SignupService.Resp.SaveDirector -> Response.ok(Request(Response.Status.OK, "User created")).build()
             is SignupService.Resp.Error -> Response.status(Response.Status.BAD_REQUEST).build()
             else -> Response.status(Response.Status.INTERNAL_SERVER_ERROR).build()
         }
