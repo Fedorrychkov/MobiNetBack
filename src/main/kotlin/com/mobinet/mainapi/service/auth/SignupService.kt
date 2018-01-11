@@ -25,7 +25,7 @@ class SignupService(private val directorsRepository: DirectorsRepository ) {
         else if (!findBy(directors))
             Resp.HaveUser("Email or Username has already been taken!")
         else {
-            val tokenGen: String = directors.username + directors.email
+            val tokenGen: String = "" + directors.email
             var key: Key = MacProvider.generateKey()
 
             var compactJws = Jwts.builder()
