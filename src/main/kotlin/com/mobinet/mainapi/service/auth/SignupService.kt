@@ -19,7 +19,6 @@ class SignupService(private val directorsRepository: DirectorsRepository ) {
         class HaveUser(val msg: String): Resp
     }
     fun signup(directors: Directors): Resp {
-        println(directors)
         return  if (directors.username == "")
             Resp.Error()
         else if (!findBy(directors))
