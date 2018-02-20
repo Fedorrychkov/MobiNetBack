@@ -10,6 +10,6 @@ interface CustomersRepository: JpaRepository<Customers, Long> {
     fun findByPhone(phone: String?): Iterable<Customers>
     fun findByEmail(email: String?): Iterable<Customers>
     fun findById(id: Long): Iterable<Customers>
-    fun findByDirectorId(directorId: Long): Iterable<Customers>
+    fun findByDirectorId(id: Long, directorId: Long): Iterable<Customers>
     fun findAllByDirectorId(directorId: Long): List<Customers>
 }

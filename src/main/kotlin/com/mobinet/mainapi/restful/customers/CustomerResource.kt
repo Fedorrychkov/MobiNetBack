@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response
 open class CustomerResource @Autowired constructor(val service: CustomerService){
     data class Request(val status: Response.Status, val message: String, val requestBody: Customers?)
     data class Request2(val status: Response.Status, val requestBody: List<Customers>)
+    data class Request3(val status: Response.Status, val requestBody: ResponseEntity<Customers>)
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -39,6 +40,19 @@ open class CustomerResource @Autowired constructor(val service: CustomerService)
         val resp = service.getCustomers(directorId)
         return when(resp) {
             is CustomerService.Resp.GetAllSuccess -> Response.ok(Request2(Response.Status.OK, resp.requestBody)).build()
+            is CustomerService.Resp.Error -> Response.status(Response.Status.BAD_REQUEST).build()
+            else -> Response.status(Response.Status.INTERNAL_SERVER_ERROR).build()
+        }
+    }
+
+    @GET
+    @Path("/{directorId}/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    fun getCustomer(@PathParam("directorId") directorId: Long, @PathParam("id") id: Long): Response {
+        val resp = service.getCustomer(id)
+        return when(resp) {
+            is CustomerService.Resp.GetOneSuccess -> Response.ok(Request3(Response.Status.OK, resp.requestBody)).build()
             is CustomerService.Resp.Error -> Response.status(Response.Status.BAD_REQUEST).build()
             else -> Response.status(Response.Status.INTERNAL_SERVER_ERROR).build()
         }
