@@ -10,6 +10,7 @@ data class Customers (
         @Id
         @GeneratedValue(strategy=GenerationType.AUTO)
         var id: Long = 0,
+        var directorId: Long = 0,
         var firstName: String? = "",
         var lastName: String? = "",
         @get: NotBlank
