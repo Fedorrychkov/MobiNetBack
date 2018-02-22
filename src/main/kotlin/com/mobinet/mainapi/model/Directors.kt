@@ -1,9 +1,6 @@
 package com.mobinet.mainapi.model
 
-import org.hibernate.validator.constraints.Email
 import org.hibernate.validator.constraints.NotBlank
-import java.time.LocalDateTime
-import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -14,7 +11,6 @@ data class Directors (
 
         @get: NotBlank
         var username: String = "",
-
 
         var firstName: String? = "",
 
