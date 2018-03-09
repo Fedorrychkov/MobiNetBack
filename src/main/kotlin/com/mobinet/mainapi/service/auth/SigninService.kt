@@ -46,4 +46,7 @@ class SigninService(private val directorsRepository: DirectorsRepository) {
             ResponseEntity.ok().body(directorsRepository.save(updateDirector))
         }.getOrElse(directors.id.toInt()){ ResponseEntity.notFound().build() }
     }
+    fun checkOAuthToken(token: String): Boolean {
+        return !directorsRepository.findByOAuthtoken(token).map {}.isEmpty()
+    }
 }
