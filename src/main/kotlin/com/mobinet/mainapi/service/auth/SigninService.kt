@@ -40,13 +40,13 @@ class SigninService(private val directorsRepository: DirectorsRepository) {
     fun updateOAuthToken(token: String, directors: Directors): ResponseEntity<Directors> {
         val username: String = directors.username
         return directorsRepository.findByUsername(username).map{ existingDirector ->
-            directors.OAuthtoken = token
+            directors.oAuthToken = token
             val updateDirector: Directors = existingDirector
-                    .copy(OAuthtoken = directors.OAuthtoken)
+                    .copy(oAuthToken = directors.oAuthToken)
             ResponseEntity.ok().body(directorsRepository.save(updateDirector))
         }.getOrElse(directors.id.toInt()){ ResponseEntity.notFound().build() }
     }
     fun checkOAuthToken(token: String): Boolean {
-        return !directorsRepository.findByOAuthtoken(token).map {}.isEmpty()
+        return !directorsRepository.findByOAuthToken(token).map {}.isEmpty()
     }
 }
