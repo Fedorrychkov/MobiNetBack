@@ -26,6 +26,8 @@ data class Directors (
 
         var token: String? = "",
 
+        var OAuthtoken: String? = "",
+
         var birthDay: String? = "",
 
         var dateCreated: String? = "",
