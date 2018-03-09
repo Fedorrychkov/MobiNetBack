@@ -23,8 +23,6 @@ open class UserConfirmResource @Autowired constructor(val service: UserConfirmSe
     @Produces(MediaType.APPLICATION_JSON)
     fun confirmEmail( @PathParam("id") id: Long, @PathParam("token") token: String): Response {
         val directors = Directors()
-//        val request = Req
-//        val token = request.getHeader("email-confirm")
         val resp = service.confirmEmail(id, token, directors)
         println("Confirm Resource: $id $token ")
         return when(resp) {

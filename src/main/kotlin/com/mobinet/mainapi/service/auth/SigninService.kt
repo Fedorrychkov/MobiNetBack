@@ -17,7 +17,6 @@ class SigninService(private val directorsRepository: DirectorsRepository) {
     }
 
     fun signin(directors: Directors): Resp {
-        println(getUsernameBool(directors.username))
         return if (getUsernameBool(directors.username) && getUserPasswordBool(directors.password)) {
             val tokenGen: String = "" + directors.username + directors.password
             var key: Key = MacProvider.generateKey()

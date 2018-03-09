@@ -25,12 +25,9 @@ class UserConfirmService(private val directorsRepository: DirectorsRepository) {
             return Resp.Success("User confirmed")
         } else
             return Resp.Error()
-//        return  Resp.EmailConirm()
-//        Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject().equals("Joe")
     }
 
     fun confirmBy(id: Long, token: String, directors: Directors): Boolean {
-//        return confirmByToken(id, token, directors)
         val director: ResponseEntity<Directors> = getDirectorById(id)
         println("Confirm Service $director \n ${director.body.token == token} \n \n BD token: ${director.body.token} token: $token")
 
@@ -39,7 +36,7 @@ class UserConfirmService(private val directorsRepository: DirectorsRepository) {
 
     fun updateConfirmStatus(id: Long, directors: Directors): ResponseEntity<Directors> {
         return directorsRepository.findById(id).map{ existingDirector ->
-            directors.userConfirmed = true // update Director status to True
+            directors.userConfirmed = true
             val updateDirector: Directors = existingDirector
                     .copy(userConfirmed = directors.userConfirmed)
             ResponseEntity.ok().body(directorsRepository.save(updateDirector))
